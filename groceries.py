@@ -1,4 +1,5 @@
 # groceries.py
+from IPython import embed
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -23,4 +24,53 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
-print(products)
+# print(products)
+# int(products[0])
+# print(products[0]["name"])
+# print(len(products))
+#product_count_message = "THERE ARE " + str(len(products)) + " PRODUCTS:"
+#print("--------------------")
+#print(product_count_message)
+#print("--------------------")
+
+#def sort_by_name(product):
+#    return product["name"]
+
+#products = sorted(products, key=sort_by_name)
+
+# PRINT PRODUCTS
+
+#for product in products:
+#    price_usd = '${0:.2f}'.format(product["price"])
+#    print(" + " + product["name"] + " - " + price_usd )
+
+departments = []
+
+for p in products:
+    departments.append(p["department"])
+
+#Remove Dups
+departments = set(departments)
+departments = list(departments)
+
+#sorted
+
+print("------------------------")
+print("THERE ARE " + str(len(departments)) + " DEPARTMENTS")
+print("------------------------")
+
+def products_belonging_to(dept_name):
+    new_products = []
+    for p in products:
+        if p["department"] == dept_name:
+            new_products.append(p)
+    return new_products # TODO: look up all products belonging to the dept_name
+
+
+for d in sorted(departments):
+    associated_products = products_belonging_to(d)
+    label = "products"
+    if len(associated_products) == 1:
+        label = "product"
+
+    print(" + " + d.title() + " (" + str(len(associated_products)) + " " + label +")")
